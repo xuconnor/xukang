@@ -16,60 +16,11 @@
     <script type="text/javascript" src="../plugins/angularjs/pagination.js"></script>
     <link rel="stylesheet" href="../plugins/angularjs/pagination.css">
     <!-- 分页组件结束 -->
-    <script>
-        var app = angular.module('pinyougou', ['pagination']);//定义模块
-        app.controller('brandController', function ($scope, $http) {
-            //读取列表数据绑定到表单中
-            $scope.findAll = function () {
-                $http.get('../brand/findAll.do').success(
-                    function (response) {
-                        $scope.list = response;
-                    }
-                );
-            }
+    <script type="text/javascript" src="../js/base_pagination.js"></script>
+    <script type="text/javascript" src="../js/service/brandService.js"></script>
+    <script type="text/javascript" src="../js/controller/baseController.js"></script>
+    <script type="text/javascript" src="../js/controller/brandController.js"></script>
 
-            //分页
-            $scope.findPage = function (page, rows) {
-                $http.get('../brand/findPage.do?page=' + page + '&rows=' + rows).success(
-                    function (response) {
-                        $scope.list = response.rows;
-                        $scope.paginationConf.totalItems = response.total;//更新总记录数
-                    }
-                );
-            }
-
-            //品牌添加
-            $scope.save = function () {
-                $http.post('../brand/add.do',$scope.entity ).success(
-                    function (response) {
-                        if (response.success){
-                            $scope.reloadList();//重新加载
-                        } else {
-                            alert(response.message);
-                        }
-                    }
-                );
-            }
-
-
-
-            //重新加载列表 数据
-            $scope.reloadList = function () {
-                //切换页码
-                $scope.findPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
-            }
-            //分页控件配置
-            $scope.paginationConf = {
-                currentPage: 1,
-                totalItems: 10,
-                itemsPerPage: 10,
-                perPageOptions: [10, 20, 30, 40, 50],
-                onChange: function () {
-                    $scope.reloadList();//重新加载
-                }
-            };
-        });
-    </script>
 </head>
 <body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="brandController">
 <!-- .box-body -->
@@ -86,7 +37,9 @@
                     <button type="button" class="btn btn-default" title="新建" data-toggle="modal"
                             data-target="#editModal" ng-click="entity={}"><i class="fa fa-file-o"></i> 新建
                     </button>
-                    <button type="button" class="btn btn-default" title="删除"><i class="fa fa-trash-o"></i> 删除</button>
+                    <button type="button" class="btn btn-default" title="删除" ng-click="dele()"><i
+                            class="fa fa-trash-o"></i> 删除
+                    </button>
                     <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i
                             class="fa fa-refresh"></i> 刷新
                     </button>
@@ -95,8 +48,11 @@
         </div>
         <div class="box-tools pull-right">
             <div class="has-feedback">
-
+                品牌名称：<input type="text" ng-model="searchEntity.name">
+                首字母：<input type="text" ng-model="searchEntity.firstChar">
+                <button class="btn btn-default" ng-click=" search(1,paginationConf.itemsPerPage)">搜索</button>
             </div>
+
         </div>
         <!--工具栏/-->
 
@@ -115,12 +71,13 @@
             </thead>
             <tbody>
             <tr ng-repeat="entity in list">
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" ng-click="updateSelection($event,entity.id)"></td>
                 <td>{{entity.id}}</td>
                 <td>{{entity.name}}</td>
                 <td>{{entity.firstChar}}</td>
                 <td class="text-center">
-                    <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal">修改
+                    <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"
+                            ng-click="findOne(entity.id)">修改
                     </button>
                 </td>
             </tr>

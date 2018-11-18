@@ -53,9 +53,9 @@
         <solrj.version>4.10.3</solrj.version>
         <ik.version>2012_u6</ik.version>
         <fastdfs-client.versioin>1.25</fastdfs-client.versioin>
-        <jackson.version>2.8.9</jackson.version>
+        <jackson.version>2.8.10</jackson.version>
         <druid.version>1.0.9</druid.version>
-        <httpclient.version>4.3.5</httpclient.version>
+        <httpclient.version>4.3.6</httpclient.version>
         <httpcore.version>4.4.4</httpcore.version>
         <jstl.version>1.2</jstl.version>
         <jsp-api.version>2.0</jsp-api.version>
@@ -319,6 +319,37 @@
                 <artifactId>ikanalyzer</artifactId>
                 <version>2012_u6</version>
             </dependency>
+            <!--jetty-->
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>apache-jsp</artifactId>
+                <version>9.2.16.v20160414</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-webapp</artifactId>
+                <version>9.2.16.v20160414</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-server</artifactId>
+                <version>9.2.16.v20160414</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-util</artifactId>
+                <version>9.2.16.v20160414</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>3.0.pre1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-plus</artifactId>
+                <version>9.3.13.v20161014</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -330,45 +361,6 @@
                 <version>2.12.4</version>
                 <configuration>
                     <skipTests>true</skipTests>
-                </configuration>
-            </plugin>
-
-            <!--清理插件 用于清理target中的所有的内容，包括parent以及parent下的所有的子项目中的target-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>2.6.1</version>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>${basedir}/pinyougou-common/target</directory>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                        <fileset>
-                            <directory>${basedir}/pinyougou-pojo/target</directory>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                        <fileset>
-                            <directory>${basedir}/pinyougou-dao/target</directory>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                        <fileset>
-                            <directory>${basedir}/pinyougou-sellergoods-interface/target</directory>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                        <fileset>
-                            <directory>${basedir}/pinyougou-sellergoods-service/target</directory>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                        <fileset>
-                            <directory>${basedir}/pinyougou-sellergoods-interface/target</directory>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                        <fileset>
-                            <directory>${basedir}/pinyougou-manager-web/target</directory>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                    </filesets>
                 </configuration>
             </plugin>
         </plugins>
