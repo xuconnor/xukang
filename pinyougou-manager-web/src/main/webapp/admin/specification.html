@@ -15,16 +15,16 @@
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!--angularJS-->
 	<script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
-	<script type="text/javascript" src="../plugins/angularjs/pagination.js"></script>
-	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
-	<script type="text/javascript" src="../js/base_pagination.js"></script>
-	<script type="text/javascript" src="../js/service/specificationService.js"></script>
-	<script type="text/javascript" src="../js/controller/baseController.js"></script>
-	<script type="text/javascript" src="../js/controller/specificationController.js"></script>
 	<!-- 分页组件开始 -->
 	<script type="text/javascript" src="../plugins/angularjs/pagination.js"></script>
 	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
 	<!-- 分页组件结束 -->
+
+	<script type="text/javascript" src="../js/base_pagination.js"></script>
+	<script type="text/javascript" src="../js/service/specificationService.js"></script>
+	<script type="text/javascript" src="../js/controller/baseController.js"></script>
+	<script type="text/javascript" src="../js/controller/specificationController.js"></script>
+
 </head>
 
 <body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="specificationController">
@@ -50,7 +50,7 @@
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
 							                    规格名称：<input  type="text" ng-model="searchEntity.specName">
-									<button class="btn btn-default" ng-click=" search(1,paginationConf.itemsPerPage)" >查询</button>
+									<button class="btn btn-default" ng-click="search(1,paginationConf.itemsPerPage)" >查询</button>
                                 </div>
                             </div>
                             <!--工具栏/-->
